@@ -1,0 +1,29 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: mysql-pv
+  labels:
+    app: mysql
+spec:                           # was "sepc"
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /mnt/data/mysql       # was "msql" – fixed typo
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: ollama-pv
+  labels:
+    app: ollama
+spec:                           # was "sepc"
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /mnt/data/ollama

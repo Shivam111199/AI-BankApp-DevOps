@@ -1,0 +1,15 @@
+apiVersion: v1                             # Define Api version
+kind: PersistentVolumeClaim                # kind name for availabe PV
+metadata:                                  # define the name of yaml
+  name: mysql-pvc
+  namespace: bankapp                       # namespace given in which block it needs to use
+spec:
+  accessModes:                             # how Acess permissions      
+    - ReadWriteOnce
+  storageClassName: manual                 # how you defined storag while creating node , or you want to give i given while node 30 gb then here you can give auo or manual as well
+  resources:                               # how much you required reequest below is 5Gi
+    requests:
+      storage: 5Gi
+  selector:                                # from which label it should be match and bind with mysql available PV  (Kubectl get pv)
+    matchLabels: 
+      app: mysql
