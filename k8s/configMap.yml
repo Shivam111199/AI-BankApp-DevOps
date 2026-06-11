@@ -5,7 +5,7 @@ metadata:
   namespace: bankapp
 data:
   MYSQL_DATABASE: bankappdb 
-  MYSQL_HOST: mysql-service
+  MYSQL_HOST: mysql-service.bankapp.svc.cluster.local
   MYSQL_PORT: "3306"
   MYSQL_USER: root
   OLLAMA_URL: https://ollama-service:11434
