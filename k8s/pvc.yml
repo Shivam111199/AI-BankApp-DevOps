@@ -13,3 +13,19 @@ spec:
   selector:                                # from which label it should be match and bind with mysql available PV  (Kubectl get pv)
     matchLabels: 
       app: mysql
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ollama-pvc
+  namespace: bankapp
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  selector:
+    matchLabels:
+      app: ollama

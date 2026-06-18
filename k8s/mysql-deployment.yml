@@ -28,11 +28,18 @@ spec:
               configMapKeyRef:
                 name: bankapp-config-map
                 key: MYSQL_DATABASE
-          - name: MYSQL_ROOT_PASSWORD
+          - name: MYSQL_ROOT_PASSWORD    
             valueFrom:
               secretKeyRef:
                 name: bankapp-secrets
                 key: MYSQL_ROOT_PASSWORD
+        resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
         volumeMounts:
           - name: mysql-storage
             mountPath: /var/lib/mysql
@@ -40,7 +47,13 @@ spec:
           exec:             # It is an healthcheck of mysql server to get the status exec is for run command
             command: ["mysqladmin", "ping", "-h", "localhost"]
           initialDelaySeconds: 15
-          periodSeconds: 10    
+          periodSeconds: 10
+        livenessProbe:
+            exec:
+              command: ["mysqladmin", "ping", "-h", "localhost"]
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 5
       volumes:
         - name: mysql-storage
           persistentVolumeClaim:

@@ -1,0 +1,5 @@
+
+1- Create ollama file and run it
+2- Add resources and liveness probe in mysql deployment
+
+

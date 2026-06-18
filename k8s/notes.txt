@@ -1,0 +1,46 @@
+what is initcontainers ?
+check logs of lavble just add -l (kubectl logs -l "label" -n bankapp
+
+
+To check pod files 
+
+[root@sghodke k8s]# kubectl exec pod/ollama-554d5975fd-r4pln -n bankapp -- ollama list
+NAME                ID              SIZE      MODIFIED       
+tinyllama:latest    2644915ede35    637 MB    27 minutes ago    
+[root@sghodke k8s]# 
+
+
+
+
+
+autscaling is an server (Metrics Server) checks pulse cpu,memory - how much it is consuming 
+Metrices serber downloaded from url https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
+then 
+
+kubectl patch deployment metrics-server -n kube-system \
+  --type='json' \
+  -p='[{"op":"add","path":"/spec/template/spec/containers/0/args/-","value":"--kubelet-insecure-tls"}]'
+
+
+
+kubectl get deploy -n kube-system
+
+
+then you below command will run
+
+
+[root@sghodke k8s]# kubectl top node
+NAME                        CPU(cores)   CPU(%)   MEMORY(bytes)   MEMORY(%)   
+tws-cluster-control-plane   159m         3%       950Mi           12%         
+tws-cluster-worker          89m          2%       1450Mi          19%         
+tws-cluster-worker2         66m          1%       932Mi           12%         
+[root@sghodke k8s]# ll
+
+
+
+Written hpa file 
+
+kubectl get hpa -n bankapp -w
+
+
